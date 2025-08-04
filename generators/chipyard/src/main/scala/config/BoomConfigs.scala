@@ -17,7 +17,7 @@ class MediumBoomV3Config extends Config(
 
 
 class MediumBoomV3Config6 extends Config(
-  new boom.v3.common.WithNMediumBooms6(1) ++                         // medium boom config
+  new boom.v3.common.WithNMediumBooms(1) ++                         // medium boom config
   new chipyard.config.AbstractConfig)
 
 class LargeBoomV3Config extends Config(

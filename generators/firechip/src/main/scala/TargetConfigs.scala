@@ -257,6 +257,21 @@ class FireSimLargeBoomConfigWRMEPrefetch extends Config(
 
 
 
+class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
+  new chipyard.config.WithTilePrefetchers ++ 
+  new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+  new WithRME ++
+  new WithFireSimHighPerfClocking  ++ 
+  new chipyard.MediumBoomV3Config)
+
+
+
 class FireSimLargeBoomConfigWRME6 extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(1) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
