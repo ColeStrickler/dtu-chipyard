@@ -258,7 +258,7 @@ class FireSimLargeBoomConfigWRMEPrefetch extends Config(
 
 
 class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
-  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithNBanks(2) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
   new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
   new WithDefaultFireSimBridges ++
@@ -268,7 +268,46 @@ class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
   new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
   new WithRME ++
   new WithFireSimHighPerfClocking  ++ 
-  new chipyard.MediumBoomV3Config)
+  new chipyard.LargeBoomV3Config)
+
+
+
+class FireSimLargeBoomConfigWRMEFast extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(2) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+  new WithRME ++
+  new WithFireSimHighPerfClocking  ++ 
+  new chipyard.LargeBoomV3Config)
+
+
+class SingleRocketConfigWRME4Prefetch extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new WithRME ++
+  new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
+  new chipyard.config.WithTilePrefetchers ++ 
+  new freechips.rocketchip.subsystem.WithNonblockingL1(4) ++   
+  new chipyard.RocketConfig)
+
+
+class DualRocketConfigWRMEPrefetch extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new WithRME ++
+  new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
+  new chipyard.config.WithTilePrefetchers ++ 
+  new freechips.rocketchip.subsystem.WithNonblockingL1(4) ++   
+  new chipyard.DualRocketConfig)
 
 
 
@@ -316,6 +355,15 @@ class SingleRocketConfigWRME extends Config(
   new chipyard.RocketConfig)
 
 
+class DualRocketConfigWRME extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new WithRME ++
+  new chipyard.DualRocketConfig)
+
 
 class SingleRocketConfigWRMEDelay extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(1) ++
@@ -328,19 +376,6 @@ class SingleRocketConfigWRMEDelay extends Config(
 
 
 class SingleRocketConfigWRME4PrefetchDelay extends Config(
-  new freechips.rocketchip.subsystem.WithNBanks(1) ++
-  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
-  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
-  new WithDefaultFireSimBridges ++
-  new WithFireSimConfigTweaks ++
-  new WithRME ++
-  new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
-  new chipyard.config.WithTilePrefetchers ++ 
-  new freechips.rocketchip.subsystem.WithNonblockingL1(4) ++   
-  new chipyard.RocketConfig)
-
-
-class SingleRocketConfigWRME4Prefetch extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(1) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
   new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
