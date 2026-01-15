@@ -253,8 +253,7 @@ class FireSimLargeBoomConfigWRMEPrefetch extends Config(
   new chipyard.config.WithTilePrefetchers ++ 
   new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
   new WithRME ++   
-  new chipyard.MediumBoomV3Config)
-
+  new chipyard.LargeBoomV3Config)
 
 
 class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
@@ -269,6 +268,15 @@ class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
   new WithRME ++
   new WithFireSimHighPerfClocking  ++ 
   new chipyard.LargeBoomV3Config)
+
+class SingleRocketConfigWRME extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new WithRME ++
+  new chipyard.RocketConfig)
 
 
 
@@ -345,14 +353,7 @@ class SingleRocketConfig extends Config(
   new chipyard.RocketConfig)
 
 
-class SingleRocketConfigWRME extends Config(
-  new freechips.rocketchip.subsystem.WithNBanks(1) ++
-  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
-  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
-  new WithDefaultFireSimBridges ++
-  new WithFireSimConfigTweaks ++
-  new WithRME ++
-  new chipyard.RocketConfig)
+
 
 
 class DualRocketConfigWRME extends Config(
