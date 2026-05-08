@@ -3,18 +3,30 @@ package chipyard
 import org.chipsalliance.cde.config.{Config}
 import freechips.rocketchip.prci.{AsynchronousCrossing}
 import freechips.rocketchip.subsystem.{InCluster}
-
+import freechips.rocketchip.subsystem._
+import subsystem.rme._
 // --------------
 // Rocket Configs
 // --------------
 
 class RocketConfig extends Config(
   new freechips.rocketchip.subsystem.WithNBigCores(1) ++         // single rocket-core
+  new chipyard.config.WithSystemBusWidth(128) ++
   new chipyard.config.AbstractConfig)
 
 class DualRocketConfig extends Config(
   new freechips.rocketchip.subsystem.WithNBigCores(2) ++
   new chipyard.config.AbstractConfig)
+
+
+class SingleRocketConfigWRME extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithRME ++
+  new chipyard.RocketConfig)
+
+
 
 class TinyRocketConfig extends Config(
   new chipyard.harness.WithDontTouchChipTopPorts(false) ++        // TODO FIX: Don't dontTouch the ports

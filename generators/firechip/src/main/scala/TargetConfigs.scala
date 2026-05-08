@@ -255,6 +255,28 @@ class FireSimLargeBoomConfigWRMEPrefetch extends Config(
   new WithRME ++   
   new chipyard.LargeBoomV3Config)
 
+class FireSimLargeBoomConfigWRMEPrefetchGemmini extends Config(
+  // FireSim-specific stuff first (bridges + tweaks)
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new chipyard.CustomGemminiSoCConfig++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++
+
+  // Gemmini + prefetcher BEFORE the main Boom config
+  //new gemmini.DefaultGemminiConfig ++                             // or your custom Gemmini fragment
+
+  new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
+  new chipyard.config.WithTilePrefetchers ++
+
+  // RME (assuming this is your custom fragment)
+  new WithRME ++
+    // Base Boom config MUST be last (or very late)
+  new chipyard.LargeBoomV3Config
+)
+
+
+
 
 class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(2) ++
@@ -280,6 +302,7 @@ class SingleRocketConfigWRME extends Config(
 
 
 
+
 class FireSimLargeBoomConfigWRMEFast extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(2) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
@@ -290,6 +313,37 @@ class FireSimLargeBoomConfigWRMEFast extends Config(
   new WithRME ++
   new WithFireSimHighPerfClocking  ++ 
   new chipyard.LargeBoomV3Config)
+
+
+
+class FireSimMegaBoomConfigWRMEFast extends Config(
+  new freechips.rocketchip.subsystem.WithNBanks(2) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+  new WithRME ++
+  new WithFireSimHighPerfClocking  ++ 
+  new chipyard.MegaBoomV3Config)
+
+
+
+
+
+class SingleRocketConfigWRME4PrefetchGemmini extends Config(
+  new WithDefaultFireSimBridges ++
+  new WithFireSimConfigTweaks ++
+  new chipyard.GemminiRocketConfig ++
+  new freechips.rocketchip.subsystem.WithNBanks(1) ++
+  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
+  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+
+  new WithRME ++
+  //new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(handleVA = true)) ++
+  //new chipyard.config.WithTilePrefetchers ++ 
+  new freechips.rocketchip.subsystem.WithNonblockingL1(4)  
+  )
 
 
 class SingleRocketConfigWRME4Prefetch extends Config(

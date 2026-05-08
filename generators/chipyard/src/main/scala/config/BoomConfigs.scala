@@ -20,6 +20,15 @@ class MediumBoomV3Config6 extends Config(
   new boom.v3.common.WithNMediumBooms(1) ++                         // medium boom config
   new chipyard.config.AbstractConfig)
 
+
+class QuadBoomV3Config extends Config(
+  new boom.v3.common.WithNMediumBooms(4) ++                          // large boom config
+  new chipyard.config.WithSystemBusWidth(128) ++
+  new chipyard.config.AbstractConfig)
+
+
+
+
 class LargeBoomV3Config extends Config(
   new boom.v3.common.WithNLargeBooms(1) ++                          // large boom config
   new chipyard.config.WithSystemBusWidth(128) ++
@@ -29,6 +38,12 @@ class MegaBoomV3Config extends Config(
   new boom.v3.common.WithNMegaBooms(1) ++                           // mega boom config
   new chipyard.config.WithSystemBusWidth(128) ++
   new chipyard.config.AbstractConfig)
+
+class DualMegaBoomV3Config extends Config(
+  new boom.v3.common.WithNMegaBooms(2) ++                           // mega boom config
+  new chipyard.config.WithSystemBusWidth(128) ++
+  new chipyard.config.AbstractConfig)
+
 
 class DualSmallBoomV3Config extends Config(
   new boom.v3.common.WithNSmallBooms(2) ++                          // 2 boom cores
@@ -66,6 +81,8 @@ class dmiMediumBoomV3CosimConfig extends Config(
   new chipyard.config.WithDMIDTM ++                              // have debug module expose a clocked DMI port
   new boom.v3.common.WithNMediumBooms(1) ++
   new chipyard.config.AbstractConfig)
+
+
 
 
 // ---------------------
