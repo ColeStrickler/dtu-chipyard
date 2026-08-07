@@ -276,8 +276,6 @@ class FireSimLargeBoomConfigWRMEPrefetchGemmini extends Config(
 )
 
 
-
-
 class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(2) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
@@ -291,6 +289,50 @@ class FireSimLargeBoomConfigWRMEPrefetchFast extends Config(
   new WithFireSimHighPerfClocking  ++ 
   new chipyard.LargeBoomV3Config)
 
+
+
+  class FireSimLargeBoomConfigWRMEPrefetchFast8stream extends Config(
+    new freechips.rocketchip.subsystem.WithNBanks(2) ++
+    new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+    new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+    new WithDefaultFireSimBridges ++
+    new WithFireSimConfigTweaks ++
+    new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(streams=16, handleVA = true)) ++
+    new chipyard.config.WithTilePrefetchers ++ 
+    new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+    new WithRME ++
+    new WithFireSimHighPerfClocking  ++ 
+    new chipyard.LargeBoomV3Config)
+  
+  class FireSimLargeBoomConfigWRMEPrefetch8stream extends Config(
+    new freechips.rocketchip.subsystem.WithNBanks(2) ++
+    new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+    new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+    new WithDefaultFireSimBridges ++
+    new WithFireSimConfigTweaks ++
+    new barf.WithTLDCachePrefetcher(new barf.MultiNextLinePrefetcherParams(streams=16, handleVA = true)) ++
+    new chipyard.config.WithTilePrefetchers ++ 
+    new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+    new WithRME ++
+    new chipyard.LargeBoomV3Config)
+
+
+
+
+
+  class FireSimLargeBoomConfigWRMEFast extends Config(
+    new freechips.rocketchip.subsystem.WithNBanks(2) ++
+    new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
+    new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
+    new WithDefaultFireSimBridges ++
+    new WithFireSimConfigTweaks ++
+    new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
+    new WithRME ++
+    new WithFireSimHighPerfClocking  ++ 
+    new chipyard.LargeBoomV3Config)
+  
+  
+
 class SingleRocketConfigWRME extends Config(
   new freechips.rocketchip.subsystem.WithNBanks(1) ++
   new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++
@@ -303,16 +345,8 @@ class SingleRocketConfigWRME extends Config(
 
 
 
-class FireSimLargeBoomConfigWRMEFast extends Config(
-  new freechips.rocketchip.subsystem.WithNBanks(2) ++
-  new freechips.rocketchip.subsystem.WithInclusiveCache(nWays=16, capacityKB=1024) ++ 
-  new freechips.rocketchip.subsystem.WithExtMemSize((1 << 30) * 4L) ++
-  new WithDefaultFireSimBridges ++
-  new WithFireSimConfigTweaks ++
-  new freechips.rocketchip.subsystem.WithNonblockingL1(6) ++   
-  new WithRME ++
-  new WithFireSimHighPerfClocking  ++ 
-  new chipyard.LargeBoomV3Config)
+
+
 
 
 

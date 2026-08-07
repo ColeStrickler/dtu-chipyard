@@ -3,7 +3,7 @@
 	url = https://github.com/chipsalliance/rocket-chip-fpga-shells.git
 [submodule "generators/bar-fetchers"]
 	path = generators/bar-fetchers
-	url = https://github.com/ucb-bar/bar-fetchers.git
+	url = https://github.com/ColeStrickler/bar-fetchers.git
 [submodule "generators/boom"]
 	path = generators/boom
 	url = https://github.com/riscv-boom/riscv-boom.git
@@ -48,7 +48,7 @@
 	url = https://github.com/ucb-bar/rocc-acc-utils.git
 [submodule "generators/rocket-chip"]
 	path = generators/rocket-chip
-	url = https://github.com/ColeStrickler/rocket-chip
+	url = https://github.com/ColeStrickler/rocket-chip.git
 [submodule "generators/rocket-chip-blocks"]
 	path = generators/rocket-chip-blocks
 	url = https://github.com/chipsalliance/rocket-chip-blocks.git
